@@ -1,0 +1,13 @@
+server:
+  port: 8111
+spring:
+  datasource:
+    url: jdbc:p6spy:mysql://localhost:3306/zhang?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=CTT
+    username: root
+    password: root
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+logging:
+  level:
+    com.zhang.mapper: debug
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
