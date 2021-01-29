@@ -35,7 +35,7 @@ public class CodeGen {
         //2.设置数据源
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);
-        dsc.setUrl("jdbc:mysql://localhost:3306/zhang");
+        dsc.setUrl("jdbc:mysql://localhost:3306/zhang2");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("root");
@@ -58,7 +58,7 @@ public class CodeGen {
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
 //        strategy.setSuperEntityClass("你自己的父类实体,没有就不用设置!");
         strategy.setEntityLombokModel(true);
-        strategy.setInclude("order_head");
+        strategy.setInclude("file_material");
         strategy.setLogicDeleteFieldName("delete");
         TableFill create = new TableFill("create_time", FieldFill.INSERT);
         TableFill update = new TableFill("update_time", FieldFill.INSERT_UPDATE);

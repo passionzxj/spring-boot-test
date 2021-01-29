@@ -37,7 +37,6 @@ public class VideoUploadController {
                               @RequestParam(value="visitCount",defaultValue="0") Integer visitCount,
                               @RequestParam(value="commentCount",defaultValue="0") Integer commentCount
                               ) throws Exception {
-
         if(videoSaveService.insertVideo(file,userId,professionalName,title,collectionCount,thumbCount,visitCount,commentCount)==1){
             HttpSession session = request.getSession();
             Object percent = session.getAttribute("upload_percent");

@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.UUID;
+import java.util.Random;
 
 public class ScreenshotUtils {
 
@@ -20,23 +20,18 @@ public class ScreenshotUtils {
      * @throws Exception
      */
     public static String fetchFrame(String videourl, MultipartFile file) throws Exception {
-        //获取当前系统时间，类似new Date()，效率比较好
-        long start = System.currentTimeMillis();
         //储存截图的文件
-        //window下用\\,电脑要有D盘，不然换成你想要的盘
-        File targetFile = new File("D:\\video\\cutpic");
+        String projectPath = System.getProperty("user.dir");
+        //新的文件名
+        String pngName = System.currentTimeMillis() + "_" + new Random().nextInt(1000) + ".png";
+        //项目地址
+        String destDir = projectPath + File.separator + "upload-video" + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator;
 
-
-        if (!targetFile.exists()) {
-            targetFile.mkdirs();
+        File file1 = new File(destDir);
+        if (!file1.exists()) {
+            file1.mkdirs();
         }
-
-        String filename = file.getOriginalFilename();
-        String filenamePrefix = filename.substring(0, filename.lastIndexOf("."));
-        //创建储存截图的图片文件路径
-        //window下用\\
-        String coverimgPath = targetFile.getPath() + "\\" + UUID.randomUUID().toString() + filenamePrefix + ".jpg";
-
+        String coverimgPath = file1.getPath() + File.separator + pngName;
 
         File cutpic = new File(coverimgPath);
 
@@ -67,7 +62,7 @@ public class ScreenshotUtils {
         ImageIO.write(bi, "jpg", cutpic);
         //ff.flush();
         ff.stop();
-        System.out.println(System.currentTimeMillis() - start);
+
         return coverimgPath;
     }
 

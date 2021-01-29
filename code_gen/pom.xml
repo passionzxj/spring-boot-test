@@ -27,6 +27,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
         <!--引入swagger支持-->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -112,6 +117,7 @@
             <artifactId>p6spy</artifactId>
             <version>3.8.1</version>
         </dependency>
+
     </dependencies>
     <build>
         <resources>
