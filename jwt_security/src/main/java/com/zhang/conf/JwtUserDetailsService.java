@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class JwtUserDetailsService implements UserDetailsService {
 
 //    @Value("${sbms.system-id}")
-    private String sbmsSystemId;
+//    private String sbmsSystemId;
 
 //    @Autowired
 //    private UserService userService;
@@ -34,7 +34,20 @@ public class JwtUserDetailsService implements UserDetailsService {
 //        List<Privilege> privileges = privilegeService.findPriByuId(user.getId(),sbmsSystemId);
 //
 //        return createJwtUser(user, privileges);
-        return null;
+        JwtUser jwtUser = new JwtUser();
+        jwtUser.setId("818747972358504448");
+        jwtUser.setUsername("马超");
+        jwtUser.setPassword("5f4dcc3b5aa765d61d8327deb882cf99");
+        jwtUser.setAuthorities(null);
+//        jwtUser.setCreateTime(user.getCreateTime());
+//        jwtUser.setOrgId(user.getOrgId());
+        jwtUser.setAccount("admin");
+//        jwtUser.setStatus(user.getStatus());
+//        jwtUser.setTelephone(user.getTelephone());
+//        jwtUser.setRoleName(user.getRoleName());
+//        jwtUser.setSchools(user.getSchools());
+        jwtUser.setEnabled(true);
+        return jwtUser;
 
 
     }
@@ -49,7 +62,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 //                auths.add(grantedAuthority);
 //            }
 //        }
-//
+////
 //        JwtUser jwtUser = new JwtUser();
 //        jwtUser.setId(user.getId());
 //        jwtUser.setUsername(user.getName());
