@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>My WebSocket</title>
+</head>
+
+<body>
+<input id="text" type="text" />
+<button onclick="send()">Send</button>
+<button onclick="closeWebSocket()">Close</button>
+<button onclick="connect()">connect</button>
+<div id="message"></div>
+</body>
+
+<script type="text/javascript">
+
+    var websocket = null;
+    function connect(){
+
+        // var ran = Math.ceil(Math.random()*100);
+        var ran = "111111";
+        //判断当前浏览器是否支持WebSocket, 主要此处要更换为自己的地址
+        if ('WebSocket' in window) {
+            index = new WebSocket("ws://localhost:8111/webSocket/"+ran);
+        } else {
+            alert('Not support websocket')
+        }
+    }
+
+    connect();
+
+
+    //连接发生错误的回调方法
+    index.onerror = function() {
+        setMessageInnerHTML("error");
+    };
+
+    //连接成功建立的回调方法
+    index.onopen = function(event) {
+        //setMessageInnerHTML("open");
+    }
+
+    //接收到消息的回调方法
+    index.onmessage = function(event) {
+        var redata = JSON.parse(event.data);
+        var percentage = Number((redata.pBytesRead / redata.pContentLength * 100).toFixed(2))
+        setMessageInnerHTML(percentage);
+
+    }
+
+    //连接关闭的回调方法
+    index.onclose = function() {
+        setMessageInnerHTML("close");
+    }
+
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function() {
+        index.close();
+    }
+
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML) {
+        document.getElementById('message').innerHTML += innerHTML + '<br/>';
+    }
+
+    //关闭连接
+    function closeWebSocket() {
+        index.close();
+    }
+
+    //发送消息
+    function send() {
+        var message = document.getElementById('text').value;
+        index.send(message);
+    }
+
+</script>
+</html>
